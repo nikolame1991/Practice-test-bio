@@ -10,6 +10,8 @@ public class BaseTestClassContact {
 
 	ContactPageClass contactPracticetest;
 
+	TestDataContact contactDataProvider;
+
 	// Initializes the WebDriver and sets up the environment before running tests
 	// Inicijalizuje WebDriver i postavlja okruženje pre pokretanja testova
 	@BeforeTest
@@ -21,6 +23,8 @@ public class BaseTestClassContact {
 
 		contactPracticetest = new ContactPageClass(driver); // Initializes the ContactPageClass object
 		// Inicijalizuje objekat ContactPageClass
+
+		contactDataProvider = new TestDataContact();
 	}
 
 	// Closes the WebDriver after tests have been executed
