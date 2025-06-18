@@ -1,59 +1,86 @@
-# Practice Test Automation 
+# 🧪 PracticeTestAutomation - Contact Form Selenium Automation
 
-## Project Overview 
-This project is designed for automated testing using Selenium WebDriver and TestNG. 
-It includes various test classes to validate different functionalities of the 
-**Practice Test Automation** website. 
+## 📄 Description
+This project is an automated UI test suite for the **Contact** page on [PracticeTestAutomation](https://practicetestautomation.com/contact/) using:
 
-## Technologies Used 
-- **Java** – Programming language 
-- **Selenium WebDriver** 
-– Browser automation 
-- **TestNG** 
-– Test framework 
-- **Page Object Model (POM)** – Structured test organization 
+- Java
+- Selenium WebDriver
+- TestNG
+- Page Object Model (POM) design pattern
 
-## Project Structure 
-## Test Cases 
-### 1. **Login Functionality** 
-- Navigate to the login page 
-- Enter valid credentials 
-- Verify successful login 
-- Validate logout functionality 
-### 2. **Contact Page Validation** 
-- Verify the presence of header, images, and text 
-- Validate input fields (Name, Last Name, Email, Message) 
-- Handle CAPTCHA interaction 
-- Submit the form and check error messages 
-### 3. **UI Elements Verification** 
-- Ensure buttons, headers, and form elements are displayed correctly 
-- Test navigation between pages 
+It validates presence of page elements, tests form input behavior, handles CAPTCHA, and submits the form.
 
-## Setup Instructions 
-### Prerequisites 
-1. Install **Java (JDK 11 or later)** 
-2. Install **Maven** 
-3. Install **Google Chrome** and **ChromeDriver** 
-4. Clone the repository: 
-```sh 
-git clone https://github.com/your-repo/practice-test-automation.git 
-5. Navigate to the project directory: 
-cd practice-test-automation 
+---
 
-Running the Tests 
-Run all tests using Maven: 
-mvn test 
-Run a specific test class: 
-mvn test -Dtest=PageClassTest 
-mvn test -Dtest=ContactTest 
+## 🚀 Features
 
-⚠️ Known Issues 
-CAPTCHA Handling: May fail if CAPTCHA loads differently per session. 
+- ✅ Verifies that:
+  - Contact page header is displayed
+  - Profile image is visible
+  - Introductory text is present and can be trimmed
+- ✅ Validates:
+  - Input fields: name, last name, email, message
+  - CAPTCHA checkbox (manual test/mocked)
+- ✅ Negative test:
+  - Incorrect email format
+  - Empty fields
+  - Broken selectors
+- 🔁 Setup and teardown logic included using `@BeforeTest`, `@AfterTest`, `@BeforeMethod`, `@AfterMethod`
 
-TimeoutExceptions: Occur due to slow page load. 
-Dynamic Elements: Require additional wait conditions. 
-🤝 Contributing 
-Want to improve the project? Feel free to fork the repository and submit pull requests! 🙌 
-📜 License 
+---
 
-This project is licensed under the MIT License.
+## 📁 Project Structure
+
+
+---
+
+## 🧪 How to Run
+
+1. Open project in your IDE (e.g., IntelliJ, Eclipse)
+2. Make sure ChromeDriver is properly configured in your system
+3. Run `ContactTest.java` using **TestNG**
+
+You can also run all tests via a test suite XML file if created.
+
+---
+
+## 🛠 Technologies Used
+
+- Java 17+
+- Selenium WebDriver
+- TestNG
+- Page Object Model (POM)
+- WebDriverWait / Explicit Wait
+- Git (for version control)
+
+---
+
+## ❗Notes
+
+- CAPTCHA interaction is automated **only if allowed** — in real production environments, CAPTCHA is often disabled in test environments or replaced by test keys.
+- Tests are written for demo/learning purposes.
+
+---
+
+## 👨‍💻 Author
+
+**Nikola Medan**  
+📍 Novi Sad, Serbia  
+📧 [nikolamedan1991@gmail.com](mailto:nikolamedan1991@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/nikola-medan-99a923124)  
+🐙 [GitHub Profile](https://github.com/nikolame1991)
+
+---
+
+## 📸 Screenshots (Optional)
+
+You can add screenshots of:
+
+- The contact form page
+- Console output
+- Successful test execution in TestNG
+
+Use this Markdown syntax:
+
+```markdown
+![Test Execution Screenshot](screenshots/test-success.png)
