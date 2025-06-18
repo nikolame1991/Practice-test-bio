@@ -94,4 +94,41 @@ public class ContactTest extends BaseTestClassContact {
 		WebElement wrongSubmitButton = driver.findElement(By.cssSelector("#wrong-submit-id"));
 		wrongSubmitButton.click();
 	}
+
+	/**
+	 * Validates that all input fields on the contact form can be filled using test
+	 * data. Includes checks for: name, last name, email, message textarea, robot
+	 * checkbox and submission.
+	 *
+	 * Validira da se sva polja na kontakt formi mogu popuniti pomoću testnih
+	 * podataka. Obuhvata: ime, prezime, e-mail, poruku, potvrdu da korisnik nije
+	 * robot i klik na dugme za slanje.
+	 */
+	@Test
+	public void validationInputFieldsWithTestDataProvider() {
+		// Enter first name with Test DataProvider
+		// Unos imena sa Test DataProvider
+		contactPracticetest.checkInputFieldName(contactDataProvider.VALID_NAMECONTACT);
+
+		// Enter last name with Test DataProvider
+		// Unos prezimena sa Test DataProvider
+		contactPracticetest.checkInputFieldLastName(contactDataProvider.VALID_LASTNAMECONTACT);
+
+		// Enter email address with Test DataProvider
+		// Unos email adrese sa Test DataProvider
+		contactPracticetest.checkInputFieldEmail(contactDataProvider.VALID_EMAIL);
+
+		// Enter message into the text area with Test DataProvider
+		// Unos poruke u polje za unos teksta sa Test DataProvider
+		contactPracticetest.checkTextarea(contactDataProvider.VALID_TEXTAREA);
+
+		// Click on CAPTCHA checkbox
+		// Klik na CAPTCHA checkbox
+		contactPracticetest.checkboxClickRobot();
+
+		// Click the submit button
+		// Klik na dugme za slanje forme
+		contactPracticetest.clickSubmitButton();
+	}
+
 }
