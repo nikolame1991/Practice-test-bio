@@ -8,7 +8,7 @@ This project is an automated UI test suite for the **Contact** page on [Practice
 - TestNG
 - Page Object Model (POM) design pattern
 
-It validates presence of page elements, tests form input behavior, handles CAPTCHA, and submits the form.
+It validates the presence of page elements, tests form input behavior, handles CAPTCHA, and submits the form.
 
 ---
 
@@ -18,47 +18,72 @@ It validates presence of page elements, tests form input behavior, handles CAPTC
   - Contact page header is displayed
   - Profile image is visible
   - Introductory text is present and can be trimmed
+
 - ✅ Validates:
   - Input fields: name, last name, email, message
   - CAPTCHA checkbox (manual test/mocked)
-- ✅ Negative test:
+
+- ✅ Negative tests:
   - Incorrect email format
   - Empty fields
   - Broken selectors
-- 🔁 Setup and teardown logic included using `@BeforeTest`, `@AfterTest`, `@BeforeMethod`, `@AfterMethod`
+
+- 🔁 Setup and teardown logic included using TestNG annotations
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
+
+src/
+└── main/
+└── java/
+└── practicetestAutomation/
+├── ContactPageClass.java
+├── PageClasses.java
+├── TestDataContact.java
+└── TestDataPracticeTestAutomation.java
+└── test/
+└── java/
+└── practicetestAutomation/
+├── ContactTest.java
+└── PracticeTest.java
+
 
 
 ---
 
-## 🧪 How to Run
-
-1. Open project in your IDE (e.g., IntelliJ, Eclipse)
-2. Make sure ChromeDriver is properly configured in your system
-3. Run `ContactTest.java` using **TestNG**
-
-You can also run all tests via a test suite XML file if created.
-
----
-
-## 🛠 Technologies Used
+## 🧰 Technologies Used
 
 - Java 17+
 - Selenium WebDriver
 - TestNG
 - Page Object Model (POM)
 - WebDriverWait / Explicit Wait
-- Git (for version control)
+- Git (version control)
 
 ---
 
-## ❗Notes
+## 🔍 Why Page Object Model?
 
-- CAPTCHA interaction is automated **only if allowed** — in real production environments, CAPTCHA is often disabled in test environments or replaced by test keys.
-- Tests are written for demo/learning purposes.
+Page Object Model (POM) helps keep test code clean, reusable, and easier to maintain by separating page structure and test logic.
+
+---
+
+## ❗ CAPTCHA Handling Notes
+
+- CAPTCHA is a challenge for automation because it is designed to prevent bots.
+- In real test environments, CAPTCHA is often disabled or replaced with test keys.
+- This project includes handling CAPTCHA iframe and checkbox click, but full automation might require manual intervention or mocks.
+
+---
+
+## 🧪 How to Run
+
+1. Open the project in your IDE (e.g., IntelliJ, Eclipse)  
+2. Ensure ChromeDriver is properly configured and compatible with your Chrome browser  
+3. Run `ContactTest.java` using TestNG  
+
+You can also run all tests via a TestNG XML suite file if created.
 
 ---
 
@@ -74,13 +99,7 @@ You can also run all tests via a test suite XML file if created.
 
 ## 📸 Screenshots (Optional)
 
-You can add screenshots of:
-
-- The contact form page
-- Console output
-- Successful test execution in TestNG
-
-Use this Markdown syntax:
+Add screenshots of the contact form, test execution, or console output to improve README presentation.
 
 ```markdown
 ![Test Execution Screenshot](screenshots/test-success.png)
