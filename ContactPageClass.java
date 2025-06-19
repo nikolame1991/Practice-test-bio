@@ -121,33 +121,44 @@ public class ContactPageClass {
 
 	// Klik na CAPTCHA checkbox unutar iframe-a
 	// Handles clicking CAPTCHA checkbox inside iframe
+	// Koristimo try-catch blok da bismo bezbedno obradili potencijalne izuzetke
+	// koji mogu nastati kada CAPTCHA nije dostupna ili se ne učita na vreme.
+	// We use try-catch to safely handle potential exceptions
+	// when CAPTCHA is not available or fails to load in time.
 	public void checkboxClickRobot() {
 		try {
+			// Provera iframe-a jer CAPTCHA se često učitava unutar iframe-a
+			// Checking for iframe since CAPTCHA usually loads inside one
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-
+	
 			if (!iframes.isEmpty()) {
 				driver.switchTo().frame(iframes.get(0));
 				System.out.println("Prebačeno na CAPTCHA iframe. / Switched to CAPTCHA iframe.");
 			} else {
-				System.out.println("Nije pronađen iframe – CAPTCHA možda učitana direktno. / No iframe found.");
+				System.out.println("CAPTCHA iframe nije pronađen. / No CAPTCHA iframe found.");
 			}
-
+	
 			if (driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[1]")).size() > 0) {
 				WebElement captcha = wait.until(ExpectedConditions.elementToBeClickable(checkboxRobot));
 				captcha.click();
 				System.out.println("CAPTCHA kliknuta! / CAPTCHA clicked!");
 			} else {
-				System.out.println("CAPTCHA element nije pronađen. / CAPTCHA not found.");
+				System.out.println("CAPTCHA element nije pronađen. / CAPTCHA element not found.");
 			}
-
+	
 			driver.switchTo().defaultContent(); // Povratak na glavni sadržaj / Switch back to main content
-
+	
 		} catch (TimeoutException e) {
-			System.out.println("Vreme isteklo – CAPTCHA se nije učitala. / Timeout – CAPTCHA did not load.");
+			// Ako CAPTCHA kasni sa učitavanjem
+			// If CAPTCHA takes too long to load
+			System.out.println("Vreme isteklo – CAPTCHA se nije učitala. / Timeout – CAPTCHA not loaded.");
 		} catch (NoSuchElementException e) {
-			System.out.println("Element nije pronađen. / Element not found.");
+			// Ako CAPTCHA element nije pronađen u DOM-u
+			// If CAPTCHA element not found in DOM
+			System.out.println("Element nije pronađen. / CAPTCHA element not found.");
 		}
 	}
+
 
 	// Klik na dugme za slanje forme
 	// Clicks the form submit button
