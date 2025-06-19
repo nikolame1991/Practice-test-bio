@@ -130,19 +130,25 @@ public class ContactPageClass {
 			// Provera iframe-a jer CAPTCHA se često učitava unutar iframe-a
 			// Checking for iframe since CAPTCHA usually loads inside one
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-	
+			// Proveravamo da li postoji iframe, jer se CAPTCHA često učitava unutar iframe-a.
+			// We check if an iframe exists, as CAPTCHA is often loaded inside an iframe.
 			if (!iframes.isEmpty()) {
 				driver.switchTo().frame(iframes.get(0));
 				System.out.println("Prebačeno na CAPTCHA iframe. / Switched to CAPTCHA iframe.");
 			} else {
+				// Ako iframe ne postoji, CAPTCHA možda još nije učitana ili se prikazuje direktno.
+    				// If no iframe is found, CAPTCHA might not have loaded yet or is shown directly.
 				System.out.println("CAPTCHA iframe nije pronađen. / No CAPTCHA iframe found.");
 			}
-	
+			// Proveravamo da li CAPTCHA element postoji pre nego što pokušamo klik.
+			// We check if CAPTCHA element exists before attempting to click it.
 			if (driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[1]")).size() > 0) {
 				WebElement captcha = wait.until(ExpectedConditions.elementToBeClickable(checkboxRobot));
 				captcha.click();
 				System.out.println("CAPTCHA kliknuta! / CAPTCHA clicked!");
 			} else {
+				// CAPTCHA nije prisutna – izbegavamo pokušaj interakcije.
+				// CAPTCHA not present – avoiding interaction to prevent failure.
 				System.out.println("CAPTCHA element nije pronađen. / CAPTCHA element not found.");
 			}
 	
