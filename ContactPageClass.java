@@ -17,147 +17,140 @@ public class ContactPageClass {
 	WebDriver driver;
 	WebDriverWait wait;
 
-	// Constructor for initializing driver and elements
 	// Konstruktor za inicijalizaciju drajvera i elemenata
+	// Constructor for initializing WebDriver and elements
 	public ContactPageClass(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
-	// Web elements for the contact page
 	// Web elementi za kontakt stranicu
+	// Web elements for the contact page
+
 	@FindBy(css = "#loop-container > div > article > div.post-header > h1")
-	WebElement checkHeaderContact;
+	WebElement checkHeaderContact; // Naslov kontakt stranice / Contact page heading
 
 	@FindBy(css = "#loop-container > div > article > div.post-content > div.wp-block-image > figure > img")
-	WebElement checkImageProfil;
+	WebElement checkImageProfil; // Profilna slika / Profile image
 
 	@FindBy(css = "#loop-container > div > article > div.post-content > p:nth-child(2)")
-	WebElement checkLongText;
+	WebElement checkLongText; // Glavni tekst / Main paragraph text
 
 	@FindBy(css = "#loop-container > div > article > div.post-content > p:nth-child(2)")
-	WebElement testElement;
+	WebElement testElement; // Element za testiranje dužine teksta / Text length test element
 
-	/*-------------------------------------------------------------*/
 	@FindBy(css = "#wpforms-161-field_0")
-	WebElement inputFieldName;
+	WebElement inputFieldName; // Polje za ime / First name input field
 
 	@FindBy(css = "#wpforms-161-field_0-last")
-	WebElement inputFieldLastName;
+	WebElement inputFieldLastName; // Polje za prezime / Last name input field
 
 	@FindBy(css = "#wpforms-161-field_1")
-	WebElement inputFieldEmail;
+	WebElement inputFieldEmail; // Polje za email / Email input field
 
 	@FindBy(css = "#wpforms-161-field_2")
-	WebElement inputTextarea;
+	WebElement inputTextarea; // Tekstualno polje za poruku / Message textarea
 
 	@FindBy(xpath = "//*[@id=\"recaptcha-anchor\"]/div[1]")
-	WebElement checkboxRobot;
+	WebElement checkboxRobot; // CAPTCHA checkbox
 
 	@FindBy(css = "#wpforms-submit-161")
-	WebElement clickButtonSubmit;
+	WebElement clickButtonSubmit; // Dugme za slanje forme / Submit button
 
-	// Methods for interacting with web elements
-	// Metode za interakciju sa web elementima
+	// === Metode za interakciju sa elementima / Methods for interacting with elements ===
 
-	// Verify if the header text is displayed
-	// Provera da li je zaglavlje prikazano
+	// Proverava da li je naslov stranice prikazan
+	// Verifies if the page heading is displayed
 	public void headerTextIsDisplay() {
 		wait.until(ExpectedConditions.visibilityOf(checkHeaderContact));
 	}
 
-	// Verify if the profile image is displayed
-	// Provera da li je profilna slika prikazana
+	// Proverava da li je slika prikazana
+	// Verifies if the profile image is displayed
 	public void imageIsDisplayed() {
 		wait.until(ExpectedConditions.visibilityOf(checkImageProfil));
 	}
 
-	// Verify if the text is displayed
-	// Provera da li je tekst prikazan
+	// Proverava da li je tekst prikazan
+	// Verifies if the text is displayed
 	public void textIsDisplayed() {
 		wait.until(ExpectedConditions.visibilityOf(checkLongText));
 	}
 
-	// Validate and trim long text if necessary
-	// Provera i skraćivanje dugog teksta ako je potrebno
+	// Proverava i skraćuje tekst ako je predugačak
+	// Validates and trims long text if necessary
 	public void verifyAndTrimText() {
 		String fullText = testElement.getText();
 
-		// Check the text length and trim if needed
-		// Provera dužine teksta i skraćivanje ako je potrebno
-		if (fullText.length() > 50) { // Example: trim if longer than 50 characters
-			String shortText = fullText.substring(0, 50) + "..."; // Shortened version with indication
-			System.out.println("Trimmed text: " + shortText);
+		if (fullText.length() > 50) { // Primer: skraćivanje teksta dužeg od 50 karaktera
+			String shortText = fullText.substring(0, 50) + "..."; // Skraćena verzija sa znakom ...
+			System.out.println("Trimovani tekst: " + shortText); // Trimmed text output
 		} else {
-			System.out.println("Original text is short: " + fullText);
+			System.out.println("Originalni tekst je kratak: " + fullText); // Text is already short
 		}
 	}
 
-	// Input first name into the field
-	// Unos imena u polje
+	// Unosi ime u odgovarajuće polje
+	// Inputs first name into the field
 	public void checkInputFieldName(String firstname) {
 		inputFieldName.clear();
 		inputFieldName.sendKeys("Nikola");
 	}
 
-	// Input last name into the field
-	// Unos prezimena u polje
+	// Unosi prezime u odgovarajuće polje
+	// Inputs last name into the field
 	public void checkInputFieldLastName(String lastname) {
 		inputFieldLastName.clear();
 		inputFieldLastName.sendKeys("Medan");
 	}
 
-	// Input email into the field
-	// Unos email adrese u polje
+	// Unosi email adresu u polje
+	// Inputs email into the field
 	public void checkInputFieldEmail(String email) {
 		inputFieldEmail.clear();
 		inputFieldEmail.sendKeys("nikolamedan1991@gmail.com");
 	}
 
-	// Input message into the text area
-	// Unos poruke u tekstualno polje
+	// Unosi poruku u tekstualno polje
+	// Inputs message into the textarea
 	public void checkTextarea(String text) {
 		inputTextarea.clear();
 		inputTextarea.sendKeys("Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
 	}
 
-	// Handle CAPTCHA checkbox click within iframe
-	// Obrada klika na CAPTCHA checkbox unutar iframe-a
+	// Klik na CAPTCHA checkbox unutar iframe-a
+	// Handles clicking CAPTCHA checkbox inside iframe
 	public void checkboxClickRobot() {
 		try {
-			// Check if there are iframes
-			// Provera da li postoje iframe-ovi
 			List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 
 			if (!iframes.isEmpty()) {
-				driver.switchTo().frame(iframes.get(0)); // Switch to the first iframe
-				System.out.println("Switched to CAPTCHA iframe.");
+				driver.switchTo().frame(iframes.get(0));
+				System.out.println("Prebačeno na CAPTCHA iframe. / Switched to CAPTCHA iframe.");
 			} else {
-				System.out.println("No iframe found, CAPTCHA might be loading directly.");
+				System.out.println("Nije pronađen iframe – CAPTCHA možda učitana direktno. / No iframe found.");
 			}
 
-			// Check if CAPTCHA element exists
-			// Provera da li CAPTCHA element postoji
 			if (driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[1]")).size() > 0) {
 				WebElement captcha = wait.until(ExpectedConditions.elementToBeClickable(checkboxRobot));
 				captcha.click();
-				System.out.println("CAPTCHA clicked!");
+				System.out.println("CAPTCHA kliknuta! / CAPTCHA clicked!");
 			} else {
-				System.out.println("CAPTCHA element not found.");
+				System.out.println("CAPTCHA element nije pronađen. / CAPTCHA not found.");
 			}
 
-			driver.switchTo().defaultContent(); // Switch back to the main content
+			driver.switchTo().defaultContent(); // Povratak na glavni sadržaj / Switch back to main content
 
 		} catch (TimeoutException e) {
-			System.out.println("Timeout: CAPTCHA did not load in time.");
+			System.out.println("Vreme isteklo – CAPTCHA se nije učitala. / Timeout – CAPTCHA did not load.");
 		} catch (NoSuchElementException e) {
-			System.out.println("Element not found: CAPTCHA might not have loaded correctly.");
+			System.out.println("Element nije pronađen. / Element not found.");
 		}
 	}
 
-	// Click the submit button
 	// Klik na dugme za slanje forme
+	// Clicks the form submit button
 	public void clickSubmitButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(clickButtonSubmit)).click();
 	}
